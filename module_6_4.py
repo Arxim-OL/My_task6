@@ -14,35 +14,38 @@ class Figure:
         self.__sides = __sides
         self.filled = filled
 
-
     def get_color(self):
         return self.__color
+
     def __is_valid_color(self, r, g, b):
         valid_color = False
-        if r >= 0 and r <= 255 and g >= 0 and g <= 255 and b >= 0 and b <= 255:
+        if 0 <= r <= 255 and 0 <= g <= 255 and 0 <= b <= 255:
             valid_color = True
         return valid_color
+
     def set_color(self, r, g, b):
         if self.__is_valid_color(r, g, b):
             self.__color = [r, g, b]
+
     def __is_valid_sides(self, *args):
-        valid_sides = False
-
-
+        valid_sides = True
+        if len(args) != 1:
+            valid_sides = False
+        if not(isinstance(args[0], int)):
+            valid_sides = False
         return valid_sides
-
 
     def get_sides(self):
         return self.__sides
+
     def __len__(self):
         perimetr = 0
         for i in self.__sides:
             perimetr += i
-
-
         return perimetr
+
     def set_sides(self, *new_sides):
-        if len (new_sides) == 1:
+        if self.__is_valid_sides(*new_sides):
             self.__sides = [new_sides[0]]
 
 
@@ -111,3 +114,4 @@ print(len(circle1))
 
 # Проверка объёма (куба):
 print(cube1.get_volume())
+
