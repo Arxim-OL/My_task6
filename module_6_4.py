@@ -1,6 +1,7 @@
 # Задание "Они все так похожи"
 
-from math import pi
+from math import pi, sqrt
+
 
 class Figure:
     sides_count = 0
@@ -67,17 +68,23 @@ class Circle (Figure):
 class Triangle (Figure):
     sides_count = 3
     def __init__(self, color, *args):
-        sides = []
+        self.sides = []
         if len(args) == 1:
             for i in range(self.sides_count):
-                sides.append(args[0])
+                self.sides.append(args[0])
         else:
             for i in range(self.sides_count):
-                sides.append(1)
-        super().__init__(list(color), sides)
+                self.sides.append(1)
+        super().__init__(list(color), self.sides)
 
     def get_square(self):
-        pass
+        a = self.sides[0]
+        b = self.sides[1]
+        c = self.sides[2]
+        p = (a + b + c) / 2
+        s = sqrt(p*(p-a)*(p-b)*(p-c))
+        return round(s, 2)
+
 class Cube (Figure):
     sides_count = 12
     def __init__(self, color, *args):
@@ -114,4 +121,6 @@ print(len(circle1))
 
 # Проверка объёма (куба):
 print(cube1.get_volume())
+
+
 
